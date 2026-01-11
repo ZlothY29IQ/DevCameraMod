@@ -1,23 +1,20 @@
 ﻿using HarmonyLib;
-using System;
 using System.Collections;
-using System.Text;
-using UnityEngine;
+using GorillaLocomotion;
 
 namespace DevCameraMod.HarmonyPatches.Patches
 {
-    [HarmonyPatch(typeof(GorillaLocomotion.Player))]
-    [HarmonyPatch("Awake", MethodType.Normal)]
+    [HarmonyPatch(typeof(GTPlayer))]
+    [HarmonyPatch(nameof(GTPlayer.Awake), MethodType.Normal)]
     internal class InitializedPatch
     {
-        internal static void Postfix(GorillaLocomotion.Player __instance) => __instance.StartCoroutine(Delay());
+        internal static void Postfix(GorillaLocomotion.GTPlayer __instance) => __instance.StartCoroutine(Delay());
 
-        internal static IEnumerator Delay()
+        private static IEnumerator Delay()
         {
             yield return 0;
             
             Plugin.Instance.OnInitialized();
-            yield break;
         }
     }
 }

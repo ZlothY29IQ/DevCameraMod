@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DevCameraMod.Scripts
 {
     public class TagDespawn : MonoBehaviour
     {
-        public VRRig rig;
+        [FormerlySerializedAs("rig")] public VRRig Rig;
         public void LateUpdate()
         {
-            if (rig == null) Destroy(gameObject);
+            if (Rig == null) Destroy(gameObject);
         }
     }
 }
